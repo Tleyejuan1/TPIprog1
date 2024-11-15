@@ -1,24 +1,23 @@
-
-import pygame, sys, time, random, os
+import pygame, sys, random #INSTALA DRIVERS Q HACEN POSIBLE EL JUEGO
 
 pygame.init()
 # VARIABLE QUE CONTIENE EL TAMAÑO DE LA PANTALLA
 play_surface = pygame.display.set_mode((500, 500))
 # VARIABLE QUE CONTIENE LOS FPS
-#VARIABLE QUE CONTIENE EL TIPO DE LETRA
+# VARIABLE QUE CONTIENE EL TIPO DE LETRA
 fuente_letra = pygame.font.Font(None, 30)
 
-# Colores disponibles para la serpiente
+#COLORES DE LA SERPIENTE
 colores = {
-    1: (255, 0, 0),    # Rojo
-    2: (0, 255, 0),    # Verde
-    3: (0, 255, 255),  # Celeste
-    4: (0, 0, 255),    # Azul
-    5: (128, 0, 128)   # Violeta
+    1: (255, 0, 0),    # ROJO
+    2: (0, 255, 0),    # VERDE
+    3: (0, 255, 255),  # CELESTE
+    4: (0, 0, 255),    # AZUL
+    5: (128, 0, 128)   # VIOLETA
 }
 
-def pedir_nombre_y_color():
-    #Pide al usuario el nombre y el color de la serpiente.
+def pedir_nombre_y_color(jugador_num): #PEDIR NOMBRE DE USUARIO Y COLOR
+    print(f"\nJugador {jugador_num}:")
     nombre = input("Ingresa el nombre de la serpiente: ")
     print("Elige el color de la serpiente:")
     print("1. Rojo")
@@ -27,7 +26,7 @@ def pedir_nombre_y_color():
     print("4. Azul")
     print("5. Violeta")
     
-    # Ciclo para asegurar que el número del color esté en el rango correcto
+    #CICLO DE NUMERO CORRECTO
     color_opcion = None
     while color_opcion not in colores:
         try:
@@ -38,119 +37,108 @@ def pedir_nombre_y_color():
             print("Entrada inválida. Por favor ingresa un número.")
     
     color = colores[color_opcion]
-    return nombre, color
+    return f"Jugador {jugador_num} - {nombre}", color
 
 
-fps = pygame.time.Clock() #genera los pfs
+fps = pygame.time.Clock()  #PONE LOS FPS DEL PROFRAMA
 
-def comida(): #GENERA COMIDA DE FORMA RANDOM POR LA PANTALLA
+def comida():  #GENERA COMIDA DE FORMA RANDOM POR LA PANTALLA
     random_pos = random.randint(0, 49) * 10
     comida_pos = [random_pos, random_pos]
     return comida_pos
 
-def guardar_puntuacion(nombre, puntaje):
-    """Guarda la puntuación en un archivo único con la puntuación máxima en la primera línea."""
-    max_puntuacion = obtener_maxima_puntuacion()
-    if puntaje > max_puntuacion:
-        max_puntuacion = puntaje
-    # Guardar la nueva puntuación máxima y todas las puntuaciones
+def guardar_puntuaciones(jugadores): #GUARDA LAS PUNTUACIONES DE LOS JUGADORES
+    mayor_puntaje = max(jugadores, key=lambda x: x[1])  #JUGADOR CON MAYOR PUNTAJE
     with open("puntuaciones.txt", "w") as archivo:
-        archivo.write(f"Maxima puntuacion: {max_puntuacion}\n")
-        archivo.write(f"{nombre}: {puntaje}\n")
-        with open("puntuaciones.txt", "a") as archivo_2:
-            archivo_2.write(f"{nombre}: {puntaje}\n")
-    
-def obtener_maxima_puntuacion():
-    """Obtiene la puntuación máxima de la primera línea del archivo."""
-    if not os.path.exists("puntuaciones.txt"):
-        return 0
-    with open("puntuaciones.txt", "r") as archivo:
-        primera_linea = archivo.readline().strip()
-        try:
-            max_puntuacion = int(primera_linea.split(": ")[1])
-        except (IndexError, ValueError):
-            max_puntuacion = 0
-    return max_puntuacion
+        archivo.write(f"¡¡GANADOR CON MAXIMA PUNTUACION:!! {mayor_puntaje[0]} - {mayor_puntaje[1]}\n")
+        for jugador, puntaje in jugadores:
+            archivo.write(f"{jugador}: {puntaje}\n")
 
-# CABEZA DE LA SERPIENTE
-def main():
-    nombre, color = pedir_nombre_y_color()
-    snake_cabeza = [100, 50] # PIXELES DE LA CABEZA DE LA SERPIENTE
-    snake_cuerpo = [[100, 50], [90, 50], [80, 50]] # PIXELES DE LA SERPIENTE EN EL CUERPO
-    sentido = "RIGHT" #MOVIMIENTO
-    run = True
-    comida_pos = comida()
-    puntaje = 0
-    max_puntuacion = obtener_maxima_puntuacion()
-#MOVIMIENTO DE LA SERPIENTE CUANDO SE TOCA DETERMINADA TECLA
-    while run:
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                run = False
-            if event.type == pygame.KEYDOWN: # Variable que hace que la serpiente se mueva a la derecha cuando mueves el mouse
-                if event.key == pygame.K_RIGHT:
-                    sentido = "RIGHT" 
-                if event.key == pygame.K_LEFT:
-                    sentido = "LEFT" # Variable que hace que se mueva a la izquierda
-                if event.key == pygame.K_UP:
-                    sentido = "UP"
-                if event.key == pygame.K_DOWN:
-                    sentido = "DOWN"
-        
-        # Movimiento de la serpiente
-        if sentido == "RIGHT":
-            snake_cabeza[0] += 10
-        if sentido == "LEFT":
-            snake_cabeza[0] -= 10
-        if sentido == "UP":
-            snake_cabeza[1] -= 10
-        if sentido == "DOWN":
-            snake_cabeza[1] += 10
-        
-        # Actualizar el cuerpo de la serpiente
-        snake_cuerpo.insert(0, list(snake_cabeza))
-        
-        if snake_cabeza == comida_pos: # HACE QUE CUANDO LA CABEZA DE LA SEPIENTE PASE POR UNA COMIDA SUME UN PUNTO
-            comida_pos = comida()
-            puntaje += 1
-            print(puntaje)
-        else:
-            snake_cuerpo.pop() # HACE QUE LA PARTE DE ATRAS DEL CUERPO DE LA SERPIENTE SE ELIMINE 
-        
-        # Dibujar la pantalla y la serpiente
-        play_surface.fill((0, 0, 0)) # Hace la pantalla negra
-        for cabeza in snake_cuerpo:
-            pygame.draw.rect(play_surface, color, pygame.Rect(cabeza[0], cabeza[1], 10, 10)) # DIBUJA LA SERPIENTE EN EL COLOR ELEGIDO
+def main(): #FOR DE LOS 3 JUGADORES Q PARTICPAN
+    jugadores = []
+    for i in range(1, 4):  # ITERA LOS JUGADORES 1, 2 y 3
+        nombre, color = pedir_nombre_y_color(i)
+        jugadores.append((nombre, color))
+
+    resultados = []  #GUARDA EL PUNTAJE DE CADA JUGADOR
+
+    #CUCLE DE JUEGO C/U
+    for nombre, color in jugadores:
+        snake_cabeza = [100, 50]
+        snake_cuerpo = [[100, 50], [90, 50], [80, 50]]
+        sentido = "RIGHT"
+        run = True
+        comida_pos = comida()
+        puntaje = 0
+        max_puntuacion = 0  #PUNTUACION MAXIMA
+
+        # MOVIMIENTO DE LA SERPIENTE CUANDO SE TOCA DETERMINADA TECLA
+        while run:
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    pygame.quit()
+                    sys.exit()
+                if event.type == pygame.KEYDOWN:  #VARIABLE QUE HACE Q LA SERPIENTE PUEDA MOVERSE CON LAS TECLAS
+                    if event.key == pygame.K_RIGHT:
+                        sentido = "RIGHT" #SE MUEVE A LA DERECHA
+                    if event.key == pygame.K_LEFT:
+                        sentido = "LEFT"  #SE MUEVE IZQUIERDA
+                    if event.key == pygame.K_UP:
+                        sentido = "UP" #SE MUEVE ARRIBA
+                    if event.key == pygame.K_DOWN:
+                        sentido = "DOWN" # SE MUEVE ABAJO
+
+            #MOVIMIENO DE LA SERPIENTE
+            if sentido == "RIGHT":
+                snake_cabeza[0] += 10
+            if sentido == "LEFT":
+                snake_cabeza[0] -= 10
+            if sentido == "UP":
+                snake_cabeza[1] -= 10
+            if sentido == "DOWN":
+                snake_cabeza[1] += 10
+
+            # Actualizar el cuerpo de la serpiente
+            snake_cuerpo.insert(0, list(snake_cabeza))
             
-        texto = fuente_letra.render(f"Puntaje: {puntaje}", 0, (255, 0, 255)) #COLOR DE LA LETRA DEL PUNTAJE
-        play_surface.blit(texto, (380, 20)) #POSICIONA EL PUNTAJE ARRIBA A LA DERECHA
+            if snake_cabeza == comida_pos:  # HACE QUE CUANDO LA CABEZA DE LA SERPIENTE PASE POR UNA COMIDA SUME UN PUNTO
+                comida_pos = comida()
+                puntaje += 1
+                max_puntuacion = max(max_puntuacion, puntaje)
+                print(puntaje)
+            else:
+                snake_cuerpo.pop()  # HACE QUE LA PARTE DE ATRÁS DEL CUERPO DE LA SERPIENTE SE ELIMINE
+
+            #DIBUJOS DE PANTALLA Y SERPIENTE
+            play_surface.fill((0, 0, 0))  #HACE LA PANTALLA NEGRA
+            for cabeza in snake_cuerpo:
+                pygame.draw.rect(play_surface, color, pygame.Rect(cabeza[0], cabeza[1], 10, 10))  #DIBUJA LA SERPIENTE EN EL COLOR ELEGIDO
+
+            texto = fuente_letra.render(f"Puntaje: {puntaje}", 0, (255, 0, 255))  #COLOR DE LA LETRA DEL PUNTAJE
+            play_surface.blit(texto, (380, 20))  #POSICIONA EL PUNTAJE ARRIBA A LA DERECHA
+            
+            texto_max = fuente_letra.render(f"Max: {max_puntuacion}", 0, (255, 255, 0))  #COLOR DE LA LETRA DE LA PUNTUACIÓN MÁXIMA
+            play_surface.blit(texto_max, (10, 20))  #POSICIONA LA PUNTUACIÓN MÁXIMA ARRIBA A LA IZQUIERDA
+            
+            texto_nombre = fuente_letra.render(f"Jugador: {nombre}", 0, (255, 255, 255))  #COLOR DE LA LETRA DEL NOMBRE
+            play_surface.blit(texto_nombre, (10, 50))  #POSICIONA EL NOMBRE DEL JUGADOR ARRIBA A LA IZQUIERDA
+            #VELOCIDAD DEL MOVIMIENTO DE LA SERPIENTE
+            if puntaje < 5:  #CUANDO EL PUNTAJE SEA MENOR A 5 IRA A VELOCIDAD NORMAL
+                fps.tick(10)
+            elif puntaje < 10:  #CUANDO EL PUNTAJE SEA MAYOR A 5 PERO MENOR A 10
+                fps.tick(15)
+            else:  #CUANDO EL PUNTAJE SEA 10 O MÁS
+                fps.tick(20)
+
+            if snake_cabeza[0] < 0 or snake_cabeza[0] >= 500 or snake_cabeza[1] < 0 or snake_cabeza[1] >= 500: #PARAMETROS DE LA PANTALLA SI SE SALE PIERDE
+                run = False
+                print("PERDISTE")
+
+            pygame.draw.rect(play_surface, (169, 6, 6), pygame.Rect(comida_pos[0], comida_pos[1], 9, 9))  #DIBUJA LA COMIDA EN ROJO
+            pygame.display.flip()
         
-        texto_max = fuente_letra.render(f"Max: {max_puntuacion}", 0, (255, 255, 0)) #COLOR DE LA LETRA DE LA PUNTUACION MAXIMA
-        play_surface.blit(texto_max, (10, 20)) #POSICIONA LA PUNTUACION MAXIMA ARRIBA A LA IZQUIERDA
-        
-        texto_nombre = fuente_letra.render(f"Jugador: {nombre}", 0, (255, 255, 255)) #COLOR DE LA LETRA DEL NOMBRE
-        play_surface.blit(texto_nombre, (10, 50)) #POSICIONA EL NOMBRE DEL JUGADOR ARRIBA A LA IZQUIERDA
-        # VELOCIDAD DEL MOVIMIENTO DE LA SERPIENTE
-        if puntaje < 5: #CUANDO EL PUNTAJE SEA MENOR A 5 IRA A VELOCIDAD NORMAL
-            fps.tick(30)
-        if puntaje >= 10: # CUANDO EL PUNTAJE SEA MAYOR A 10 IRA MAS RAPIDO
-            fps.tick(50)
-        if puntaje >= 15:
-            fps.tick(70) # CUANDO EL PUNTAJE SEA 15 AUMENTA LA VELOCIDAD
-        
-        if snake_cabeza[0] <= 0 or snake_cabeza[0] >= 500: #SI VAS A LA DERECHA DELTODO PERDES
-            run = False
-            print("PERDISTE")
-        if snake_cabeza[1] <= 0 or snake_cabeza[1] >= 500: #SI VAS A LA IZQUIERDA DELTODO PERDES
-            run= False
-            print("PERDISTE")
-        
-        pygame.draw.rect(play_surface, (169, 6, 6), pygame.Rect(comida_pos[0], comida_pos[1], 9, 9)) #DIBUJA LA COMIDA EN ROJO
-        pygame.display.flip()
-        fps.tick(10)
-    
-    guardar_puntuacion(nombre, puntaje)
-    pygame.quit()
-    sys.exit()
+        resultados.append((nombre, puntaje))
+
+    guardar_puntuaciones(resultados)
 
 main()

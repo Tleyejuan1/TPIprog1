@@ -1,2 +1,4 @@
-Maxima puntuacion: 1
-juan: 1
+¡¡GANADOR CON MAXIMA PUNTUACION:!! Jugador 2 - JUANISIMA - 7
+Jugador 1 - PEPE: 6
+Jugador 2 - JUANISIMA: 7
+Jugador 3 - PEDR: 5
