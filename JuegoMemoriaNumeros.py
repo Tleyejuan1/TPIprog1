@@ -1,6 +1,22 @@
 import random
 import time
 
+# Nombre del archivo para guardar el puntaje máximo
+ARCHIVO_PUNTAJE = "puntaje_maximo.txt"
+
+# Función para cargar el puntaje máximo desde el archivo
+def cargar_puntaje_maximo():
+    try:
+        with open(ARCHIVO_PUNTAJE, "r") as archivo:
+            return int(archivo.read())
+    except (FileNotFoundError, ValueError):
+        return 0
+
+# Función para guardar el puntaje máximo en el archivo
+def guardar_puntaje_maximo(puntaje):
+    with open(ARCHIVO_PUNTAJE, "w") as archivo:
+        archivo.write(str(puntaje))
+
 # Función principal del juego
 def juego_memoria():
     puntaje_maximo = cargar_puntaje_maximo()
