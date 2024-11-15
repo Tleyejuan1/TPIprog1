@@ -71,7 +71,7 @@ def Categorias():
         return Categorias()
 
 def iniciar_preguntas(categoria_elegida, cantidad_jugadores):
-    preguntas = preguntas_trivia[categoria_elegida]
+    preguntas = PreguntasTrivia[categoria_elegida]
     puntajes = [0] * cantidad_jugadores
 
     if cantidad_jugadores == 1:
@@ -114,7 +114,7 @@ def iniciar_preguntas(categoria_elegida, cantidad_jugadores):
             ganador = puntajes.index(max_puntaje) + 1
             print(f"\nEl ganador es el Jugador {ganador} con {max_puntaje} puntos.")
 
-menu_principal()
+menu_inicial()
 cantidad_jugadores = Participantes()
 categoria = Categorias()
 iniciar_preguntas(categoria, cantidad_jugadores)
