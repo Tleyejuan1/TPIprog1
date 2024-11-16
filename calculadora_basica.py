@@ -13,12 +13,17 @@ def division(a ,b):
     else:
         return "Error: Division por cero."
     
-def raiz(a):
-    return a**0.5
 
 def potencia(a, b):
     return a**b
     
+def raiz(indice, radicando):   #primer parametro indice, segundo parametri radicando (indice √ radicando)
+    if radicando < 0 and indice % 2 == 0:
+        return "Error: No se puede calcular la raíz de un número negativo con un índice par"
+    
+    resultado = radicando ** (1 / indice)
+    return resultado
+
 
 print('''Elija la operacion que desea realizar: 
 1. Suma.
