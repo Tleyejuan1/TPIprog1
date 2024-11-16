@@ -130,7 +130,41 @@ while opcion_principal != 4:
                         print("Opcion invalida.")
         
         elif opcion_principal == 2:
-            pass
+            opcion_conversor = 0
+            print("""Eliga la conversion que quiera realizar:
+                  1. Libras a kilogramos o kilogramos a libra
+                  2. Pulgadas a centimetros o centimetros a pulgadas
+                  3. Pies a metros o metros a pies
+                  4. Millas a kilometros o kilometros a millas
+                  5. Fahrenheit a celsius o de celsius a farenhet
+                  6. Volver al menu principal de la calculadora""")
+            while opcion_conversor != 6:
+                opcion_conversor = int(input("Ingrese numero de la opcion: "))
+                if opcion_conversor == 6:
+                    print("Menú principal de la calculadora.")
+                if opcion_conversor == 1:
+                        nume1 = int(input("Ingrese el tipo de conversion 1: de lb a Kg o 2 de Kg a Lb"))
+                        nume2 = float(input("El valor a convertir "))
+                        print(convertir_libras_a_kilogramos(nume2,nume1))
+                elif opcion_conversor == 2:
+                        nume1 = int(input("Ingrese el tipo de conversion: 1: de In a cm 2 de Cm a In"))
+                        nume2 = float(input("El valor a convertir "))
+                        print(convertir_pulgadas_a_centimetros(nume2,nume1))
+                elif opcion_conversor == 3:
+                        nume1 = int(input("Ingrese el tipo de conversion: 1: de ft a M o 2 de M a Ft "))
+                        nume2 = float(input("El valor a convertir "))
+                        print(convertir_pies_a_metros(nume2,nume1))
+                elif opcion_conversor == 4:
+                        nume1 = int(input("Ingrese el tipo de conversion: 1: Mi a KM 2: Km a Mi "))
+                        nume2 = float(input("El valor a convertir "))
+                        print(convertir_millas_a_kilometros(nume2,nume1)) 
+                elif opcion_conversor == 5:
+                        nume1 = int(input("Ingrese el tipo de conversion: 1: ªf a ªC 2:ªC a ªF"))
+                        nume2 = float(input("El valor a convertir "))
+                        print(convertir_fahrenheit_a_celsius(nume2,nume1))                       
+                else:
+                    print("Opcion invalida")
+            
 
         elif opcion_principal == 3:
             print("Calculadora de funciones lineales.")
