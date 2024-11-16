@@ -32,7 +32,7 @@ print('''Elija la operacion que desea realizar:
 4. Division.
 5. Radicacion.
 6. Potenciacion.
-7. Salir del programa.''')
+7. Volver al menú principal de la calculadora.''')
 
 opcion = 0
 
@@ -40,7 +40,7 @@ while opcion != 7:
 
     opcion = int(input("Ingrese numero de la opcion: "))
     if opcion == 7:
-        print("Fin del programa.")
+        print("Menú principal de la calculadora.")
     
     if opcion != 7:
 
