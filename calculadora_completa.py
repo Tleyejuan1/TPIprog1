@@ -175,6 +175,9 @@ while opcion_principal != 4:
             print(calcular_ecuacion_lineal(x1, y1, x2, y2))
             print("Menú principal de la calculadora.")
 
+        elif opcion_principal == 4:
+            print("Menu principal del programa.")
+
         else:
             print("Opcion invalida.")
         
