@@ -128,13 +128,21 @@ while opcion_principal != 4:
                         print(potencia(num1, num2))
                     else:
                         print("Opcion invalida.")
-
+        
         elif opcion_principal == 2:
-            
+            pass
 
+        elif opcion_principal == 3:
+            print("Calculadora de funciones lineales.")
+            x1 = float(input("Ingrese el valor de X1: "))
+            y1 = float(input("Ingrese el valor de Y1: "))
+            x2 = float(input("Ingrese el valor de X2: "))
+            y2 = float(input("Ingrese el valor de Y2: "))
+            print(calcular_ecuacion_lineal(x1, y1, x2, y2))
+            print("Menú principal de la calculadora.")
 
-
-
+        else:
+            print("Opcion invalida.")
         
 
 
