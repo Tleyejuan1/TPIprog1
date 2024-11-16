@@ -28,8 +28,6 @@ def convertir_libras_a_kilogramos(valor, tipo_conversion):
         return valor / 0.453592  
     else:
         return "Opción de conversión inválida"
-
-
 def convertir_pulgadas_a_centimetros(valor, tipo_conversion):
     if tipo_conversion == 1:  # Pulgadas a centímetros
         return valor * 2.54 
@@ -37,8 +35,6 @@ def convertir_pulgadas_a_centimetros(valor, tipo_conversion):
         return valor / 2.54  
     else:
         return "Opción de conversión inválida"
-
-
 def convertir_pies_a_metros(valor, tipo_conversion):
     if tipo_conversion == 1:  # Pies a metros
         return valor * 0.3048  
@@ -46,7 +42,6 @@ def convertir_pies_a_metros(valor, tipo_conversion):
         return valor / 0.3048  
     else:
         return "Opción de conversión inválida"
-
 def convertir_millas_a_kilometros(valor, tipo_conversion):
     if tipo_conversion == 1:  # Millas a kilómetros
         return valor * 1.60934  
@@ -54,7 +49,6 @@ def convertir_millas_a_kilometros(valor, tipo_conversion):
         return valor / 1.60934  
     else:
         return "Opción de conversión inválida"
-
 def convertir_fahrenheit_a_celsius(valor, tipo_conversion):
     if tipo_conversion == 1:  # Fahrenheit a Celsius
         return (valor - 32) * 5/9  
