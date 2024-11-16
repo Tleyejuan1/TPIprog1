@@ -136,7 +136,7 @@ while opcion_principal != 4:
                   2. Pulgadas a centimetros o centimetros a pulgadas
                   3. Pies a metros o metros a pies
                   4. Millas a kilometros o kilometros a millas
-                  5. Fahrenheit a celsius o de celsius a farenhet
+                  5. Fahrenheit a celsius o de celsius a farenheit
                   6. Volver al menu principal de la calculadora""")
             while opcion_conversor != 6:
                 opcion_conversor = int(input("Ingrese numero de la opcion: "))
