@@ -186,16 +186,19 @@ def programa_principal():
             opcion_principal = int(input("Seleccione una opción: "))
 
             if opcion_principal == 1:
-                print('''Elija la operación que desea realizar: 
-                1. Suma.
-                2. Resta.
-                3. Multiplicación.
-                4. División.
-                5. Radicación.
-                6. Potenciación.
-                7. Volver al menú principal.''')
+                
                 opcion = 0
                 while opcion != 7:
+
+                    print('''Elija la operación que desea realizar: 
+            1. Suma.
+            2. Resta.
+            3. Multiplicación.
+            4. División.
+            5. Radicación.
+            6. Potenciación.
+            7. Volver al menú principal.''')
+
                     opcion = int(input("Ingrese número de la opción: "))
                     if opcion == 1:
                         num1 = float(input("Ingrese el primer número: "))
@@ -227,23 +230,26 @@ def programa_principal():
                         print("Opción inválida.")
             elif opcion_principal == 2:
                     opcion_conversor = 0
-                    print("""Eliga la conversion que quiera realizar:
-                        1. Libras a kilogramos o kilogramos a libra
-                        2. Pulgadas a centimetros o centimetros a pulgadas
-                        3. Pies a metros o metros a pies
-                        4. Millas a kilometros o kilometros a millas
-                        5. Fahrenheit a celsius o de celsius a farenheit
-                        6. Volver al menu principal de la calculadora""")
+
                     while opcion_conversor != 6:
+
+                        print("""Eliga la conversion que quiera realizar:
+            1. Libras a kilogramos o kilogramos a libra
+            2. Pulgadas a centimetros o centimetros a pulgadas
+            3. Pies a metros o metros a pies
+            4. Millas a kilometros o kilometros a millas
+            5. Fahrenheit a celsius o de celsius a farenheit
+            6. Volver al menu principal de la calculadora""")
+                    
                         opcion_conversor = int(input("Ingrese numero de la opcion: "))
                         if opcion_conversor == 6:
                             print("Menú principal de la calculadora.")
                         if opcion_conversor == 1:
-                                nume1 = int(input("Ingrese el tipo de conversion 1: de lb a Kg o 2 de Kg a Lb"))
+                                nume1 = int(input("Ingrese el tipo de conversion 1: de lb a Kg o 2 de Kg a Lb "))
                                 nume2 = float(input("El valor a convertir "))
                                 print(convertir_libras_a_kilogramos(nume2,nume1))
                         elif opcion_conversor == 2:
-                                nume1 = int(input("Ingrese el tipo de conversion: 1: de In a cm 2 de Cm a In"))
+                                nume1 = int(input("Ingrese el tipo de conversion: 1: de In a cm 2 de Cm a In "))
                                 nume2 = float(input("El valor a convertir "))
                                 print(convertir_pulgadas_a_centimetros(nume2,nume1))
                         elif opcion_conversor == 3:
@@ -255,7 +261,7 @@ def programa_principal():
                                 nume2 = float(input("El valor a convertir "))
                                 print(convertir_millas_a_kilometros(nume2,nume1)) 
                         elif opcion_conversor == 5:
-                                nume1 = int(input("Ingrese el tipo de conversion: 1: ªf a ªC 2:ªC a ªF"))
+                                nume1 = int(input("Ingrese el tipo de conversion: 1: ªf a ªC 2:ªC a ªF "))
                                 nume2 = float(input("El valor a convertir "))
                                 print(convertir_fahrenheit_a_celsius(nume2,nume1))                       
                         else:
