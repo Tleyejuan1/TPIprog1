@@ -11,16 +11,16 @@ def programa_principal():
         try:
             opcion_principal = int(input("Seleccione una opción: "))
             if opcion_principal == 1:
-                programa_1()  # Llamada a programa_1
+                programa_1()  # Llamada a trivia
             elif opcion_principal == 2:
-                calculadora()  # Llamada al Snake Game (descomentar cuando exista)
+                calculadora()  # Llamada a calculadora
             elif opcion_principal == 3:
                 juego_memoria()  # Llamada al Juego de Memoria
             elif opcion_principal == 4:
-                programa_2()  # Llamada a Calculadora
+                programa_2()  # Llamada a snake game
             elif opcion_principal == 5:
                 print("Saliendo del programa...")
-                break  # Finaliza el bucle del programa principal
+                break  
             else:
                 print("Opción inválida. Intente de nuevo.")
         except ValueError:
