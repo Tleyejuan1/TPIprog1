@@ -2,7 +2,7 @@ def programa_principal():
     # definan el juego completo como funcion y copien y peguenlo aca, falta el trivista y el master, tengan en cuenta de que
     #los juegos tienen que tener una opcion  para volver a este menu.
     # acuerdense de llamar a la funcion abajo en el menu
-    #el ultimo que edite esto borre estas aclaraciones
+    #el ultimo que edite esto borre estas aclaraciones...
     
     def programa_1():
         print()
