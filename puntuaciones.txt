@@ -1,4 +1,4 @@
-¡¡GANADOR CON MAXIMA PUNTUACION:!! Jugador 3 - 1 - 2
-Jugador 1 - 1: 0
-Jugador 2 - 1: 0
-Jugador 3 - 1: 2
+¡¡GANADOR CON MAXIMA PUNTUACION:!! Jugador 3 - pepe - 3
+Jugador 1 - juan: 0
+Jugador 2 - pedro: 0
+Jugador 3 - pepe: 3
